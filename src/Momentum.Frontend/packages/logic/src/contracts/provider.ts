@@ -22,7 +22,7 @@ import type { SolutionsProvider } from "./solutions-provider.js";
  * has no such capability" and surfaces hide the feature; present-but-unauthorized
  * resolves degraded rather than throwing.
  */
-export interface InnovationBacklogProvider {
+export interface MomentumProvider {
   identity: IdentityProvider;
   ideas: IdeasProvider;
   solutions: SolutionsProvider;

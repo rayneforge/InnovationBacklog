@@ -19,7 +19,7 @@ export function Discovery({
   return (
     <section>
       <PageHeader
-        title="Search Innovation Hub"
+        title="Search Momentum"
         detail={`${results.length} matches`}
       />
       <p className={styles.pageIntro}>

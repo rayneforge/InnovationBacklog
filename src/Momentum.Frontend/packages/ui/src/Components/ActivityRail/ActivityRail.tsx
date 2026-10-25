@@ -32,7 +32,7 @@ export function ActivityRail({
           const isAgent = auditActorName(record.actorType) === "agent";
           const actor = auditActorName(record.actorType) === "user"
             ? actorLabel(record)
-            : "Innovation Hub";
+            : "Momentum";
           return (
             <div key={`${record.id}-${i}`} className={styles.railGroup}>
               <button

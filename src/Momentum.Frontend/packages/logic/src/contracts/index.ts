@@ -6,4 +6,4 @@ export type { ApprovalsProvider, ApprovalInbox, Decision } from "./approvals-pro
 export type { IdentityProvider } from "./identity-provider.js";
 export type { EnvironmentProvider } from "./environment-provider.js";
 export type { InsightsProvider } from "./insights-provider.js";
-export type { InnovationBacklogProvider } from "./provider.js";
+export type { MomentumProvider } from "./provider.js";

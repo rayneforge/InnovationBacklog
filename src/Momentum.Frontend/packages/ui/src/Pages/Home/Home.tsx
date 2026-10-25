@@ -42,14 +42,7 @@ export interface HomeProps {
   onExploreNeeds: () => void;
   onExploreSolutions: () => void;
   busy: boolean;
-  /**
-   * The workspace fetch, which is not the same thing as `busy`.
-   *
-   * `busy` tracks the search box. Every empty state on this page is derived from
-   * array length, so with nothing tracking the initial load the page confidently
-   * announced "Nothing happening yet" while Azure DevOps and Dataverse were still
-   * answering.
-   */
+
   loading?: boolean;
   onOpenDiscovery: (item: DiscoveryItem) => void;
   onOpenSolution: (solution: Solution) => void;
@@ -126,8 +119,7 @@ export function Home({
 
   const contributorEvidence = contributors.slice(0, 5).map((id) => ({
     id,
-    // Carried from the feed: the id alone is a Dataverse GUID on this host, and
-    // rendering it produced "Someone" for every contributor.
+    // Display names come from resolved identity data, with a stable fallback.
     name: activity.find((record) => record.actorId === id)?.actorName ?? null,
     evidence: `${activity.filter((record) => record.actorId === id && auditActorName(record.actorType) === "user").length} updates`,
   }));
@@ -261,7 +253,7 @@ export function Home({
         <Pending text="Loading the hub…" />
       ) : isEmpty ? (
         <section className={styles.firstUse}>
-          <h2>Start the Innovation Hub</h2>
+          <h2>Build momentum together</h2>
           <p className={styles.firstUseSub}>
             Share an idea for others to build on or a solution the organization
             can reuse.

@@ -21,17 +21,17 @@ public class TagListTests
     [Fact]
     public void Normalize_CollapsesInnerWhitespace()
     {
-        var tags = TagList.Normalize(new[] { "Power   Automate" });
+        var tags = TagList.Normalize(new[] { "Quiet   Hours" });
 
-        Assert.Equal(new[] { "Power Automate" }, tags);
+        Assert.Equal(new[] { "Quiet Hours" }, tags);
     }
 
     [Fact]
     public void Normalize_DedupesCaseInsensitivelyKeepingTheFirstSpelling()
     {
-        var tags = TagList.Normalize(new[] { "Power Automate", "power automate", "POWER AUTOMATE" });
+        var tags = TagList.Normalize(new[] { "Quiet Hours", "quiet hours", "QUIET HOURS" });
 
-        Assert.Equal(new[] { "Power Automate" }, tags);
+        Assert.Equal(new[] { "Quiet Hours" }, tags);
     }
 
     [Fact]

@@ -44,15 +44,7 @@ export interface ApprovalsProvider {
   // Links
   // -------------------------------------------------------------------------
 
-  /**
-   * Assert that a solution answers an idea.
-   *
-   * Reviewers only. That restriction is what lets the link be a plain Azure DevOps
-   * `Related` link with no attributes: there is no proposal to hold pending, and
-   * therefore no approval state and no relationship taxonomy to record.
-   *
-   * Idempotent — linking the same pair twice returns the existing link.
-   */
+  /** Reviewers only; the backend authorizes relationship decisions. */
   linkSolution(ideaId: string, solutionId: string): Promise<IdeaSolutionLink>;
   unlinkSolution(ideaId: string, solutionId: string): Promise<void>;
 

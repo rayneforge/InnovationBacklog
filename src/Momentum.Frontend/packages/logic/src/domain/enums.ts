@@ -95,17 +95,7 @@ export function canChangeVisibility(role: Role): boolean {
   return role === "Administrator";
 }
 
-/**
- * Whether `role` may see an item at this visibility.
- *
- * `isOwner` is the person who shared it, who keeps sight of their own work up to
- * the point an administrator hides it outright. Mirrors `ItemVisibilityRules.CanSee`.
- *
- * NOTE: the Azure DevOps adapter cannot honour the owner exception — area-path ACLs
- * have no such concept, so a restricted item never reaches its author at all. This
- * function stays correct for the in-memory and HTTP providers; the ADO provider is
- * knowingly stricter. See the accepted parity gap in scripts/provisioning/README.md.
- */
+/** Item visibility mirrors backend rules; owners retain access unless hidden by an administrator. */
 export function canSee(visibility: ItemVisibility, role: Role, isOwner: boolean): boolean {
   switch (visibility) {
     case "Everyone":

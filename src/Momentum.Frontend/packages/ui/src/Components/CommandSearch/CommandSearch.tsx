@@ -87,7 +87,7 @@ export function CommandSearch({
             if (event.key === "Escape") setPreviewOpen(false);
           }}
           placeholder="Search ideas, solutions, people, and teams"
-          aria-label="Search Innovation Hub"
+          aria-label="Search Momentum"
           role="combobox"
           aria-expanded={previewOpen && preview.length > 0}
         />

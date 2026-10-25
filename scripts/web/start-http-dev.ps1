@@ -10,13 +10,13 @@ All requests are treated as the dev@localhost user. Use for local development on
 Set-StrictMode -Version Latest
 $ErrorActionPreference = "Stop"
 
-$projectRoot = Resolve-Path (Join-Path $PSScriptRoot "..")
+$projectRoot = Resolve-Path (Join-Path $PSScriptRoot "../..")
 
 $env:MOMENTUM_AUTH_MODE = "none"
 
 Write-Host "Starting Momentum HTTP server (dev/no-auth) on http://localhost:5100 ..." -ForegroundColor Cyan
 Write-Host "  Auth: none (all requests run as dev@localhost)" -ForegroundColor DarkGray
-Write-Host "  Web app: http://localhost:5100/app" -ForegroundColor DarkGray
+Write-Host "  Web app: http://localhost:5100/apps/web/" -ForegroundColor DarkGray
 Write-Host "  MCP:     http://localhost:5100/api/mcp" -ForegroundColor DarkGray
 Write-Host ""
 

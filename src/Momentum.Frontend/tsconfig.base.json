@@ -1,5 +1,5 @@
 {
-  "//": "Base config for the Innovation Backlog code-app stack. The existing @momentum/* packages carry standalone configs and deliberately do not extend this.",
+  "//": "Base config for the Momentum code-app stack. The existing @momentum/* packages carry standalone configs and deliberately do not extend this.",
   "compilerOptions": {
     "target": "ES2022",
     "lib": ["ES2022", "DOM", "DOM.Iterable"],

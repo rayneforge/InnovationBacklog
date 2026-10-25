@@ -103,12 +103,7 @@ export function requestStatusName(status: Request["status"] | string): string {
   return status;
 }
 
-/**
- * A raw record key, which is never something to show a person.
- *
- * Dataverse lookups key on GUIDs, so an unresolved actor rendered as
- * "8f3c1a2b 4d5e 6f70 …" once title-casing had run over it.
- */
+/** Raw GUID identity keys are not display names; use a readable fallback. */
 const GUID =
   /^\{?[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}\}?$/i;
 
@@ -116,7 +111,7 @@ export function personName(id: string): string {
   if (!id) return "Someone";
   if (id === "dev@localhost") return "Dev";
   if (id === "anonymous") return "A contributor";
-  if (id === "momentum") return "Innovation Hub";
+  if (id === "momentum") return "Momentum";
   if (GUID.test(id)) return "Someone";
   return id
     .split("@")[0]

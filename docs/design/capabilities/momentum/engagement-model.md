@@ -85,7 +85,7 @@ That makes the lifecycle much more expressive.
 
 ## AdoptionRecord
 
-Do not infer all adoption from completed implementations. A team may already be using a published solution without ever having created an implementation record in Innovation Hub. Adoption is an explicit record and becomes the strongest evidence that a catalog item has value.
+Do not infer all adoption from completed implementations. A team may already be using a published solution without ever having created an implementation record in Momentum. Adoption is an explicit record and becomes the strongest evidence that a catalog item has value.
 
 ```
 AdoptionRecord

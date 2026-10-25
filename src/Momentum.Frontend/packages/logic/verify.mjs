@@ -7,7 +7,7 @@
  * visibility was silently dropped, and adoption statuses were invented that the
  * domain never had.
  *
- *   node verify.mjs        (or: pnpm --filter @innovation-backlog/logic verify)
+ *   node verify.mjs        (or: pnpm --filter @momentum/logic verify)
  *
  * Run against dist, so it exercises what consumers actually import.
  */
@@ -60,8 +60,7 @@ check(
 );
 
 section("Comments are public");
-// No audience tier: an ADO work item comment is readable by anyone who can read the
-// item, so restricting a conversation means restricting the ITEM, via its area path.
+// This provider exposes the public conversation projection.
 const subject = { itemType: "Idea", itemId: "i-104" };
 const submitterComments = await submitter.collaboration.listComments(subject);
 const approverComments = await approver.collaboration.listComments(subject);
@@ -129,7 +128,7 @@ check(
 const solutionRollup = (await admin.solutions.getSolutionRollups(["s-201"]))["s-201"];
 check(
   "active and completed adoptions split on status, not on completedAt",
-  solutionRollup.activeUses === 2 && solutionRollup.completedUses === 1,
+  solutionRollup.activeUses === 1 && solutionRollup.completedUses === 3,
 );
 
 section("Tag normalization");

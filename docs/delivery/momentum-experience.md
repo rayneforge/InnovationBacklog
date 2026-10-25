@@ -1,7 +1,7 @@
 # Momentum Experience — Delivery Plan
 
 ## Purpose
-Track the delivery of the Innovation Hub momentum experience described in `docs/design/capabilities/momentum/`. This document holds the data iteration order, the UI iteration order, the recommended first vertical slice, and a checkbox task breakdown that is updated as work proceeds.
+Track the delivery of the Momentum momentum experience described in `docs/design/capabilities/momentum/`. This document holds the data iteration order, the UI iteration order, the recommended first vertical slice, and a checkbox task breakdown that is updated as work proceeds.
 
 ## Guiding Principle
 Store facts once. Derive engagement surfaces from those facts. Deliver real behavior incrementally instead of designing a sophisticated experience around fake/demo metrics.
@@ -90,7 +90,7 @@ Treat `Follow` as the next addition when notifications/personalization exist. Tr
 - [x] Purple identity used for energy (ambient gradient, count/rank/progress transitions, avatar accumulation, depth, brief glow on user-caused state change), not for every border/icon/card.
 
 ### Iteration 3 — Add the Activity Rail
-- [ ] Replace vertical "Around Innovation Hub" feed with a compact horizontal rail.
+- [ ] Replace vertical "Around Momentum" feed with a compact horizontal rail.
 - [ ] Slow horizontal movement, edge fades, pause on hover/focus, trailing-edge entry.
 - [ ] Every event navigable; only meaningful events qualify.
 

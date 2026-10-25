@@ -1,13 +1,4 @@
-/**
- * @innovation-backlog/logic
- *
- * Domain types, provider contracts, hooks and the in-memory provider.
- *
- * This package must never learn about a backend. No Dataverse column name, no
- * OData string, no Azure DevOps field reference, no Power Apps SDK import. If
- * something here needs one of those, it belongs in the app's provider layer behind
- * a contract instead.
- */
+
 
 export * from "./domain/index.js";
 export * from "./contracts/index.js";

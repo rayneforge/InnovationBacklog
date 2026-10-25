@@ -15,15 +15,7 @@ export interface Attachment {
   fileName: string;
   contentType: string;
   length: number;
-  /**
-   * Where the file actually lives, when the host can say.
-   *
-   * The .NET host serves attachments from its own store at `/api/attachments/{id}`,
-   * so it has no url to give and the UI falls back to that route. The code app's
-   * attachments are native Azure DevOps work item attachments, which live on
-   * `dev.azure.com` and are not reachable through any route this host serves — a
-   * chip pointing at `/api/attachments/{id}` there links nowhere at all.
-   */
+  /** Optional attachment URL supplied by a host; otherwise use /api/attachments/{id}. */
   url?: string | null;
 }
 
@@ -46,18 +38,7 @@ export const MAX_ATTACHMENT_BYTES = 10 * 1024 * 1024;
 // Comments
 // ---------------------------------------------------------------------------
 
-/**
- * A comment on an idea or solution.
- *
- * There is no audience. Comments are native Azure DevOps work item comments, which
- * are readable by anyone who can read the item — so a private tier could not be
- * represented honestly, and pretending otherwise is worse than not offering it.
- * Restricting who sees a conversation is done by restricting who sees the ITEM,
- * through its area path.
- *
- * A consequence worth knowing: anything an automated triage step writes here is
- * visible to the submitter. Findings that should not be are a field, not a comment.
- */
+/** Public comment projection. The backend enforces item visibility and comment audience. */
 export interface Comment {
   id: string;
   subjectId: string;
@@ -97,13 +78,7 @@ export interface ActivityEntry {
   subjectId: string;
   actorType: ActorType;
   actorId: string;
-  /**
-   * The actor's display name, when the backing store can resolve it.
-   *
-   * `actorId` is whatever the store uses as a key, and for Dataverse that is a GUID —
-   * which surfaced raw in the feed because there was nothing better to render.
-   * Optional: hosts that only have the id omit it and callers fall back.
-   */
+  /** Optional display name resolved by the host; otherwise callers use the stored identity key. */
   actorName?: string | null;
   summary: string;
   audience: string;

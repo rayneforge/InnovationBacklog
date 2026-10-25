@@ -195,9 +195,9 @@ export function App(): React.ReactElement {
   if (!user) {
     return (
       <main className="auth-screen">
-        <div className="brand-mark">C</div>
+        <div className="brand-mark">M</div>
         <span className="eyebrow">Organizational capability workspace</span>
-        <h1>Innovation Hub</h1>
+        <h1>Momentum</h1>
         <p>
           Turn ideas and proven work into reusable organizational capability.
         </p>

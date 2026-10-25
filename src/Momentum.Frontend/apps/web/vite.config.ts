@@ -12,7 +12,7 @@ export default defineConfig({
       "@momentum/contracts": path.resolve(__dirname, "../../packages/contracts/src/index.ts"),
       // @momentum/ui reads the solution-kind specs from logic, so anything that
       // bundles ui from source needs this alias too.
-      "@innovation-backlog/logic": path.resolve(__dirname, "../../packages/logic/src/index.ts"),
+      "@momentum/logic": path.resolve(__dirname, "../../packages/logic/src/index.ts"),
       "@momentum/sdk": path.resolve(__dirname, "../../packages/sdk/src/index.ts"),
       "@momentum/ui": path.resolve(__dirname, "../../packages/ui/src/index.ts"),
       "@momentum/ui/*": path.resolve(__dirname, "../../packages/ui/src/*"),

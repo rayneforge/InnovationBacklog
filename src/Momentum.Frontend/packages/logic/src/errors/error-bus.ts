@@ -42,6 +42,6 @@ export function subscribeToErrors(listener: ErrorBusListener): () => void {
  * providers that never registered the reference table — log those and move on.
  */
 export function reportSwallowed(context: string, error: unknown): void {
-  console.warn(`[innovation-backlog] ${context} failed:`, error);
+  console.warn(`[momentum] ${context} failed:`, error);
   emitError(error);
 }

@@ -114,7 +114,7 @@ export function MyWork({
         <div className={styles.workEmpty}>
           <ContextualEmpty
             title="You have not shared anything yet."
-            text="Innovation Hub turns ideas and existing solutions into reusable capabilities."
+            text="Momentum turns ideas and existing solutions into reusable capabilities."
           />
           <div className={styles.emptyActions}>
             <button

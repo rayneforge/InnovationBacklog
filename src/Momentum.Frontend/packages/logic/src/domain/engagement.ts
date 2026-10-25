@@ -48,14 +48,7 @@ export interface Adoption {
   id: string;
   solutionId: string;
   startedBy: string;
-  /**
-   * The adopter's display name, when the backing store can resolve it.
-   *
-   * `startedBy` is whatever the store keys on, and for Dataverse that is a
-   * systemuser GUID — which renders as "Someone" everywhere a name is expected.
-   * Optional, exactly like `ActivityEntry.actorName`: hosts whose key is already an
-   * identity (the .NET side stores a UserId) omit it and callers fall back.
-   */
+  /** Optional display name resolved by the host; otherwise callers use the stored identity key. */
   startedByName?: string | null;
   projectName: string;
   team: string | null;
@@ -120,16 +113,6 @@ export interface RequestParticipationInput {
 // Links
 // ---------------------------------------------------------------------------
 
-/**
- * A claim that a solution answers an idea.
- *
- * Deliberately attribute-free. An earlier model gave a link a relationship taxonomy
- * (Proposed / Relevant / Existing) and its own approval state, both of which existed
- * only because anyone could propose one. Linking is now a reviewer action, so there
- * is no pending state and nothing left to classify — which means the link is a plain
- * Azure DevOps `Related` link rather than a row in a side table, and it shows up in
- * the work item link panel and in WIQL for free.
- */
 export interface IdeaSolutionLink {
   ideaId: string;
   solutionId: string;

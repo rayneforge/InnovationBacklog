@@ -16,7 +16,7 @@
     "clean": "echo 'nothing to clean'"
   },
   "dependencies": {
-    "@innovation-backlog/logic": "workspace:*",
+    "@momentum/logic": "workspace:*",
     "@momentum/sdk": "workspace:*",
     "react": "^18.3.1",
     "react-dom": "^18.3.1"

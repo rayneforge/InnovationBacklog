@@ -245,7 +245,7 @@ if (-not $dbConn) {
 $scopeString = "$ApiScope openid profile email offline_access"
 $sep = "=" * 72
 
-$projectRoot = (Resolve-Path (Join-Path $PSScriptRoot "..")).Path
+$projectRoot = (Resolve-Path (Join-Path $PSScriptRoot "../..")).Path
 
 Write-Host "`n$sep" -ForegroundColor Magenta
 Write-Host "Momentum -- Auth0 Configuration" -ForegroundColor Magenta

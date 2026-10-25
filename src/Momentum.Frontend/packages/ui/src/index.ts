@@ -20,7 +20,7 @@ export type {
 /**
  * Presentational components: props in, callbacks out, no data access.
  *
- * These are the ones any host can mount, and the set the Innovation Backlog code
+ * These are the ones any host can mount, and the set the Momentum code
  * app composes its pages from. Components that still fetch their own data through
  * `useApi` are deliberately NOT exported — a component that reaches for a backend
  * can only be used by a host that has that particular backend, which is how a

@@ -47,7 +47,7 @@ export function ActivityPane({
               const isAgent = auditActorName(record.actorType) === "agent";
               const actor = auditActorName(record.actorType) === "user"
                 ? actorLabel(record)
-                : "Innovation Hub";
+                : "Momentum";
               return (
                 <button
                   key={record.id}

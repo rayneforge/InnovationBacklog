@@ -1,7 +1,7 @@
 # Momentum — Home Experience
 
 ## Purpose
-Define the target homepage structure and the ten UI iterations that evolve the Innovation Hub homepage from a static enterprise portal into a fluid, lightly gamified innovation system. The existing information architecture is largely usable; this iteration focuses on behavior, motion, hierarchy, and the data needed to support them.
+Define the target homepage structure and the ten UI iterations that evolve the Momentum homepage from a static enterprise portal into a fluid, lightly gamified innovation system. The existing information architecture is largely usable; this iteration focuses on behavior, motion, hierarchy, and the data needed to support them.
 
 ## Target Homepage Structure
 
@@ -9,7 +9,7 @@ The homepage converges toward:
 
 ```
 Top Bar
-  Innovation Hub                  + Contribute        User
+  Momentum                  + Contribute        User
 
 Hero / Search
   Greeting
@@ -38,7 +38,7 @@ The homepage should feel like one continuous system, not several dashboard widge
 
 ### Consolidate or remove
 - "Happening around you"
-- "Around Innovation Hub"
+- "Around Momentum"
 - standalone hero metrics when they duplicate Momentum
 - repeated "recently shared" messaging across multiple surfaces
 
@@ -63,7 +63,7 @@ Move from "friendly community portal" to "live innovation system". Introduce the
 
 ## Iteration 2 — Build the Momentum Stage
 
-The Momentum Stage is the visual signature of Innovation Hub. It rotates slowly between a small number of meaningful states.
+The Momentum Stage is the visual signature of Momentum. It rotates slowly between a small number of meaningful states.
 
 ### State: Rising Demand
 ```
@@ -116,7 +116,7 @@ Avoid making every border, icon, and card purple.
 
 ## Iteration 3 — Add the Activity Rail
 
-Replace the current vertical "Around Innovation Hub" feed with a compact horizontal activity rail.
+Replace the current vertical "Around Momentum" feed with a compact horizontal activity rail.
 
 ```
 Maya started Identity Modernization

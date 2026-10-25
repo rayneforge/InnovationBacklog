@@ -26,7 +26,7 @@ import type { CreateIdeaInput, Idea, IdeaQuery, UpdateIdeaInput } from "../../do
 import type { IdeaRollup, RollupMap, SearchItem, SearchQuery, SearchResult, SolutionRollup } from "../../domain/search.js";
 import type { CreateSolutionInput, Solution, SolutionQuery } from "../../domain/solution.js";
 import type { ApprovalInbox, Decision } from "../../contracts/approvals-provider.js";
-import type { InnovationBacklogProvider } from "../../contracts/provider.js";
+import type { MomentumProvider } from "../../contracts/provider.js";
 import { AppError } from "../../errors/errors.js";
 import type { MemorySeed, MemoryVote } from "./seed.js";
 import { defaultSeed } from "./seed.js";
@@ -41,22 +41,9 @@ export interface MemoryProviderOptions {
 
 const clone = <T>(value: T): T => structuredClone(value);
 
-/**
- * An in-memory implementation of the whole provider contract.
- *
- * Two jobs. It lets components and pages be built and reviewed with no tenant, no
- * Azure DevOps organization and no network. And it is a compile-time proof that the
- * contracts describe the domain rather than a backend: if a method here cannot be
- * written without inventing an OData filter or a work item id, the contract is
- * shaped wrong and should be fixed before an adapter enshrines it.
- *
- * It enforces the rules that matter — item visibility and comment audience — for the
- * same reason. A fake that returns everything to everyone would let a surface be
- * built against data it will never actually receive.
- */
 export function createMemoryProvider(
   options: MemoryProviderOptions = {},
-): InnovationBacklogProvider {
+): MomentumProvider {
   const store = options.seed ?? defaultSeed();
   const role: Role = options.role ?? "Administrator";
   const latency = options.latencyMs ?? 0;

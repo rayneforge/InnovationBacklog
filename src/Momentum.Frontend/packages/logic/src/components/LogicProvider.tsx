@@ -1,5 +1,5 @@
 import React, { createContext, useCallback, useContext, useMemo, useState } from "react";
-import type { InnovationBacklogProvider } from "../contracts/provider.js";
+import type { MomentumProvider } from "../contracts/provider.js";
 import { ProviderNotConfiguredError } from "../errors/errors.js";
 
 /**
@@ -37,7 +37,7 @@ const ZERO_VERSIONS: VersionMap = {
 };
 
 interface LogicContextValue {
-  provider: InnovationBacklogProvider;
+  provider: MomentumProvider;
   versions: VersionMap;
   invalidate: (...families: DataFamily[]) => void;
 }
@@ -45,7 +45,7 @@ interface LogicContextValue {
 const LogicContext = createContext<LogicContextValue | null>(null);
 
 export interface LogicProviderProps {
-  provider: InnovationBacklogProvider;
+  provider: MomentumProvider;
   children: React.ReactNode;
 }
 
@@ -77,7 +77,7 @@ function useLogicContext(): LogicContextValue {
   return context;
 }
 
-export function useProvider(): InnovationBacklogProvider {
+export function useProvider(): MomentumProvider {
   return useLogicContext().provider;
 }
 
@@ -106,7 +106,7 @@ export function useInvalidate(): (...families: DataFamily[]) => void {
  * gate a control, not to decide whether to show an error.
  */
 export function useCapability<T>(
-  select: (provider: InnovationBacklogProvider) => T | undefined,
+  select: (provider: MomentumProvider) => T | undefined,
 ): T | undefined {
   const provider = useProvider();
   return select(provider);

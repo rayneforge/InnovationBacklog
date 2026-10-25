@@ -5,11 +5,7 @@ import styles from "./LoadingScreen.module.scss";
 export interface LoadingScreenProps {
   /** Product name shown under the mark. */
   title?: string;
-  /**
-   * Status lines, rotated in order. Each host passes what is actually happening —
-   * the code app is resolving a Dataverse user, the web app is establishing a
-   * session — so the copy is not baked into the component.
-   */
+
   messages?: string[];
   /** Milliseconds between lines. */
   interval?: number;
@@ -33,7 +29,7 @@ const DEFAULT_MESSAGES = [
  * would be a bigger interruption than the section is worth.
  */
 export function LoadingScreen({
-  title = "Innovation Hub",
+  title = "Momentum",
   messages = DEFAULT_MESSAGES,
   interval = 2600,
 }: LoadingScreenProps = {}): React.ReactElement {

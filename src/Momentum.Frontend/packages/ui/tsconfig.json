@@ -14,7 +14,7 @@
     "rootDir": "src",
     "paths": {
       "@momentum/sdk": ["../sdk/dist/index.d.ts"],
-      "@innovation-backlog/logic": ["../logic/dist/index.d.ts"],
+      "@momentum/logic": ["../logic/dist/index.d.ts"],
       "@momentum/contracts": ["../contracts/dist/index.d.ts"]
     }
   },

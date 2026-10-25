@@ -25,14 +25,7 @@ export type Request = RequestResponse;
 
 export type Solution = SolutionResponse;
 
-/**
- * `url` is added by the adapter, not the wire.
- *
- * The .NET host keeps attachments in its own store and serves them from
- * `/api/attachments/{id}`, so it has no url to give. The code app's are native Azure
- * DevOps work item attachments living on `dev.azure.com`, which that route cannot
- * reach — so a host that knows where the file is says so, and the rest fall back.
- */
+/** Optional attachment URL supplied by the host; otherwise use /api/attachments/{id}. */
 export type Attachment = AttachmentResponse & { url?: string | null };
 
 export type VoteSummary = VoteSummaryResponse;
@@ -45,13 +38,7 @@ export type RequestSolution = {
   addedAt: string;
 };
 
-/**
- * `startedByName` is added by the adapter, not the wire — see `ActivityRecord`.
- *
- * `startedBy` is whatever the store keys on: a UserId on the .NET side, a Dataverse
- * systemuser GUID in the code app. A GUID has no name in it, so the host that can
- * resolve one says so and the rest fall back to deriving it from the key.
- */
+/** Optional display name resolved by the host; otherwise callers use the stored identity key. */
 export type SolutionUse = SolutionUseResponse & { startedByName?: string | null };
 
 /** Same as the wire, except its attachments may know where they live. */
@@ -187,22 +174,5 @@ export type ParticipationRequest = {
  * copy — feeds phrase themselves from `action` and `resourceType`. See
  * docs/reference/glossary.md.
  */
-/**
- * `actorName` is added by the adapter, not the wire.
- *
- * `actorId` is whatever the backing store keys on — a UPN on some hosts, a GUID on
- * Dataverse. Optional, so a host that only has the id omits it and callers fall back
- * to deriving a name from the key.
- */
+/** Optional display name resolved by the host; otherwise callers use the stored identity key. */
 export type ActivityRecord = ActivityResponseItem & { actorName?: string | null };
-
-/*
-  MomentumItem / MomentumHome / the two projections used to live here, feeding
-  SpotlightCard on Home.
-
-  They are gone because nothing ever produced them: there is no /momentum endpoint in
-  the .NET API, no momentum route in the code app's callTool, and useWorkspace never
-  fetched one — so `momentum.items` was permanently empty and the card had never
-  rendered in either host. Its styling now lives in ActivitySplit's featured carousel,
-  which shows real solutions ranked by real engagement.
-*/

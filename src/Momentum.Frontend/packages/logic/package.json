@@ -1,8 +1,8 @@
 {
-  "name": "@innovation-backlog/logic",
+  "name": "@momentum/logic",
   "version": "1.0.0",
   "private": true,
-  "description": "Domain types, provider contracts, hooks and the in-memory provider for the Innovation Backlog code app. Knows nothing about Dataverse, Azure DevOps or the Power Apps SDK.",
+  "description": "Domain types, provider contracts, hooks, and an in-memory provider for Momentum.",
   "type": "module",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",

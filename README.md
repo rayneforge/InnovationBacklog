@@ -1,181 +1,131 @@
 # Momentum
 
-Momentum is an authenticated backlog and solution-catalog workspace. Business users submit backlog ideas or existing solutions, automated triage prepares structured evidence, and approvers accept or reject submissions before publication.
+**Find useful solutions. Shape new ideas. See work move forward.**
 
-Momentum is the system of record. Azure Table Storage holds business state, Azure Queue Storage carries workflow events, and `Momentum.Worker` executes queue-triggered triage and publication work. The HTTP API powers the browser experience while the MCP server exposes the same business capabilities to agents.
+Momentum brings a shared solution catalog, idea intake, review, and delivery visibility into one workspace. Discover what already works, contribute your perspective, and follow the work that matters to you.
 
----
+![Momentum Home design preview](docs/images/momentum-home.jpg)
 
-## Current Capabilities
+## The experience
 
-- Backlog and solution submission intake
-- Automatic creation triage through a queue-triggered Worker
-- Audience-filtered comments and internal review notes
-- Approver inbox with durable accept and reject decisions
-- Backlog and solution-catalog publication and search
-- HTTP and MCP capability surfaces with shared authorization
-- Aspire composition for Azurite, Service, Worker, and Frontend
+- **Home** showcases solutions ranked by usage, recent activity, and recently updated solutions outside the showcase.
+- **Explore** brings discovery and personal work together. Switch between Everything and My work, then Browse or Dashboard without losing your filters.
+- **Dashboard** shows scope, completion, blocked work, and stage movement across projects or within one project. Drill into the underlying work while keeping context.
 
----
+<details>
+<summary>See the delivery dashboard</summary>
 
-## Project Structure
+![Momentum delivery dashboard design preview](docs/images/momentum-dashboard.jpg)
 
-```
-.
-├── src/
-│   ├── Momentum.AppHost/        # Aspire app host
-│   ├── Momentum.Service/          # .NET server: MCP, auth, REST API, DB
-│   ├── Momentum.ServiceDefaults/ # Aspire service defaults
-│   ├── Momentum.Contracts/      # Shared DTOs and constants
-│   ├── Momentum.Worker/          # Queue-triggered Azure Functions
-│   ├── Momentum.Library/         # Domain, Application, Runtime, Infrastructure
-│   └── Momentum.Frontend/        # React/Vite workspace (pnpm + Turbo)
-│       ├── apps/
-│       │   ├── board/                 # MCP app bundle (single-file HTML)
-│       │   └── web/                   # Public web SPA
-│       ├── packages/
-│       │   ├── sdk/                   # Shared types, namespace constants, React context
-│       │   └── ui/                    # React components for the MCP app
-│       ├── package.json
-│       ├── pnpm-workspace.yaml
-│       └── turbo.json
-├── scripts/                           # PowerShell helpers for Auth0/OAuth setup
-├── Dockerfile
-└── docs/
-    └── reference/
-        ├── architecture.md
-        └── glossary.md
-```
+</details>
 
----
+### Design preview and application
 
-## Quick Start
+The screenshots show the interactive [Momentum concept](src/Momentum.Frontend/apps/web/public/momentum-concept.html), available locally at **http://localhost:5100/apps/web/momentum-concept.html** after building the web app. It uses fictional museum projects and people. Delivery charts use dated demonstration events; saved items and other preview interactions are stored for the browser session.
 
-### Full local application
+The React application is served at **http://localhost:5100/apps/web/**. Its .NET service provides persistent submissions, catalog search, audience-aware comments, review decisions, and engagement records. The concept is the direction for the experience; its portfolio history and charts are not yet backed by production event storage.
 
-```bash
-# Build the solution
-dotnet build Momentum.slnx
+The [experience brief](docs/design/momentum-experience-brief.txt) records the current layout, navigation, and data decisions.
 
-# Run Azurite, Service, Worker, and Frontend
-dotnet run --project src/Momentum.AppHost
-```
+## Run locally
 
-Or use the PowerShell helper:
+You need the .NET SDK selected by [global.json](global.json), Node.js 20 or newer, pnpm 10.33, and Docker for the Aspire storage emulator. Azure Functions Core Tools enables the optional local Worker.
+
+Build the frontend from the workspace:
 
 ```powershell
-scripts/start-http-dev.ps1
-```
-
-Use the Service endpoint shown in the Aspire dashboard. The MCP endpoint is `/api/mcp`.
-
-### UI workspace
-
-```bash
 cd src/Momentum.Frontend
 corepack enable
 pnpm install --frozen-lockfile
 pnpm build:apps
+cd ../..
 ```
 
-The built apps are output to `src/Momentum.Service/wwwroot/apps/` and served by the .NET server.
+Start the local stack:
 
-The board is delivered through the MCP resource URI `ui://momentum/board/app.html`. Its React shell uses the official MCP Apps bridge for host initialization, host styling, automatic resizing, and calls back to server tools with `app.callServerTool(...)`.
-
-### Connect VS Code
-
-The included `.vscode/mcp.json` points VS Code to the local development endpoint:
-
-```json
-{
-  "servers": {
-    "momentum-http": {
-      "type": "http",
-      "url": "http://localhost:5100/api/mcp"
-    }
-  }
-}
+```powershell
+dotnet run --project src/Momentum.AppHost
 ```
 
-Start only one HTTP hosting path at a time. Running Aspire and `scripts/start-http-dev.ps1` simultaneously can compete for port `5000`. After rebuilding the server or board, restart the MCP server and reconnect it in VS Code so the host reads the current tool metadata and HTML resource.
+Aspire starts Azurite and the Service, and starts the Worker and frontend development process when their tools are available. Open the Service endpoint shown in the Aspire dashboard.
 
----
+If Azurite is already running on its default ports, start just the Service:
+
+```powershell
+./scripts/web/start-http-dev.ps1
+```
+
+This serves the application and preview on port **5100** with development authentication. Run one hosting path at a time to avoid competing listeners. Development mode is for local use.
+
+## How it works
+
+```text
+Browser / MCP client
+        |
+Momentum.Service  -->  Application  -->  Domain
+        |                  |
+        +------ Infrastructure ------+
+                      |
+             Azure Storage
+           tables / queues / blobs
+                      |
+              Momentum.Worker
+```
+
+The Service exposes HTTP and MCP capabilities with shared business authorization. Tables hold business state, queues carry workflow events, and the queue-triggered Worker handles triage and publication.
+
+| Location | Responsibility |
+| --- | --- |
+| `src/Momentum.AppHost` | Local Aspire composition |
+| `src/Momentum.Service` | HTTP API, authentication, MCP, and static apps |
+| `src/Momentum.Worker` | Queue-triggered workflow execution |
+| `src/Momentum.Library` | Domain, Application, Runtime, and Infrastructure layers |
+| `src/Momentum.Contracts` | Shared .NET contracts |
+| `src/Momentum.Frontend/apps/web` | React/Vite application and standalone concept |
+| `src/Momentum.Frontend/apps/docs` | Docusaurus documentation |
+| `src/Momentum.Frontend/packages` | Contracts, SDK, logic, and UI packages |
+| `tests/Momentum.Tests` | Backend tests |
 
 ## Configuration
 
-All settings are passed as environment variables. The prefix is `MOMENTUM_*`.
+Settings use the `MOMENTUM_` prefix. See [.env.example](.env.example) for names and examples; export settings into the host environment before starting the Service.
 
-### Storage
+| Setting | Purpose |
+| --- | --- |
+| `MOMENTUM_STORAGE_CONNECTION_STRING` | Azure Storage connection; defaults to local Azurite |
+| `MOMENTUM_AUTH_MODE` | `none`, `entra`, or `oauth` |
+| `MOMENTUM_AUTH_ENTRA_*` | Entra tenant, client, audience, and redirect settings |
+| `MOMENTUM_AUTH_OAUTH_*` | OAuth/OIDC issuer, client, scopes, and redirect settings |
+| `MOMENTUM_SESSION_SECRET` | Session cookie signing secret |
+| `MOMENTUM_AUTH_PRE_REGISTERED_CLIENTS` | Optional MCP OAuth client registrations |
 
-| Variable | Default | Description |
-|---|---|---|
-| `MOMENTUM_STORAGE_CONNECTION_STRING` | `UseDevelopmentStorage=true` | Azure Storage or Azurite connection string |
+`--dev` or the Development hosting environment disables authentication. Use a non-development environment and configured identity provider for deployment.
 
-### Authentication
+## Agent access
 
-| Variable | Default | Description |
-|---|---|---|
-| `MOMENTUM_AUTH_MODE` | `entra` in HTTP mode | `none` \| `entra` \| `oauth` |
-| `MOMENTUM_AUTH_ENTRA_TENANT_ID` | | Required when mode is `entra` |
-| `MOMENTUM_AUTH_ENTRA_CLIENT_ID` | | Required when mode is `entra` |
-| `MOMENTUM_AUTH_ENTRA_CLIENT_SECRET` | | Required when mode is `entra` |
-| `MOMENTUM_AUTH_OAUTH_ISSUER` | | Required when mode is `oauth` |
-| `MOMENTUM_AUTH_OAUTH_CLIENT_ID` | | Required when mode is `oauth` |
-| `MOMENTUM_AUTH_OAUTH_CLIENT_SECRET` | | Required when mode is `oauth` |
-| `MOMENTUM_SESSION_SECRET` | `dev-secret-change-me` | Cookie signing secret |
-| `MOMENTUM_AUTH_PRE_REGISTERED_CLIENTS` | | JSON array of clients with custom URI schemes |
+The MCP HTTP endpoint is **`/api/mcp`**. [.vscode/mcp.json](.vscode/mcp.json) connects to the local Service, and [.mcp.json](.mcp.json) provides the stdio configuration.
 
-See `.env.example` for the full list.
+Available tools include `search_solutions`, `search_requests`, `get_request`, `create_request`, `add_comment`, `add_vote`, `accept_request`, and `reject_request`.
 
-### Auth0 Helper
+## Check changes
 
 ```powershell
-scripts/configure-auth0.ps1 -Domain <your-domain>.us.auth0.com -AppName "Momentum Server"
-scripts/start-http-auth.ps1
+dotnet test tests/Momentum.Tests/Momentum.Tests.csproj
+cd src/Momentum.Frontend
+pnpm build:apps
+pnpm --filter @momentum/logic verify
 ```
 
----
+The frontend build checks package types and builds the web application and documentation. For preview changes, also inspect Home, Explore, Dashboard, and drill-in behavior at desktop and narrow viewport sizes.
 
-## MCP Server Usage
+## Deploy
 
-### HTTP
-
-```json
-{
-  "servers": {
-    "momentum": {
-      "type": "http",
-      "url": "https://your-domain.com/api/mcp"
-    }
-  }
-}
-```
-
-The server exposes example MCP primitives:
-
-- `momentum_hello` — greeting tool
-- `momentum_list_items` / `momentum_create_item` — example CRUD tools
-- `momentum_board` — opens the interactive MCP App board
-- `momentum://workspace` — example resource
-- `ui://momentum/board/app.html` — single-file MCP App resource
-- `momentum_hello` — example prompt template
-
-Replace these stubs with your own domain tools as you build your product.
-
----
-
-## Deployment
-
-Build the Docker image:
-
-```bash
+```powershell
 docker build -t momentum .
-docker run -p 8080:8080 -v mcp-starter-data:/mnt/data momentum
+docker run --env-file .env.production -p 8080:8080 momentum
 ```
 
-The container exposes the server on port `8080`.
-
----
+Supply the storage connection, authentication settings, and session secret through your deployment environment. The image serves HTTP on port **8080**. Deploy the Worker separately for queue processing.
 
 ## License
 

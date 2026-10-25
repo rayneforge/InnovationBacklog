@@ -49,12 +49,7 @@ export interface SearchQuery {
 // Engagement rollups
 // ---------------------------------------------------------------------------
 
-/**
- * Precomputed engagement counts for an idea, keyed by item id in the provider's
- * response. Reads come from the rollup rather than by counting rows per item: the
- * Azure DevOps connector has no batch form for work item comments, so a per-item
- * fan-out would exhaust its 300-calls-per-60-seconds budget on a single list.
- */
+/** Precomputed engagement counts keyed by item id, avoiding per-item reads. */
 export interface IdeaRollup {
   votes: number;
   votes30d: number;

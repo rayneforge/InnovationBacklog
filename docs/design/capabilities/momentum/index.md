@@ -1,7 +1,7 @@
 # Momentum & Engagement Capability Design
 
 ## Purpose
-Define the engagement and momentum layer that evolves the Innovation Hub homepage from a static enterprise portal into a fluid, lightly gamified innovation system. The layer makes real organizational behavior visible — demand, participation, execution, adoption, and impact — derived from domain facts rather than manually curated claims.
+Define the engagement and momentum layer that evolves the Momentum homepage from a static enterprise portal into a fluid, lightly gamified innovation system. The layer makes real organizational behavior visible — demand, participation, execution, adoption, and impact — derived from domain facts rather than manually curated claims.
 
 ## Goal
 Make real organizational behavior visible:

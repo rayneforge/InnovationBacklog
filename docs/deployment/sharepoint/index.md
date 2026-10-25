@@ -1,6 +1,6 @@
 # SharePoint Deployment Guide
 
-This guide covers deploying the Momentum Innovation Hub to a SharePoint Online site as an SPFx web part. The web part renders the full Momentum UI and reads/writes directly to SharePoint lists via the SharePoint REST API — no backend server required.
+This guide covers deploying the Momentum to a SharePoint Online site as an SPFx web part. The web part renders the full Momentum UI and reads/writes directly to SharePoint lists via the SharePoint REST API — no backend server required.
 
 ## Sections
 

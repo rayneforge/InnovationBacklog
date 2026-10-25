@@ -1,12 +1,4 @@
-/**
- * One error type for every backend, classified at the adapter boundary.
- *
- * Adapters see failures three different ways — a thrown Error with an HTTP-ish
- * message, an OData `{ error: { code, message } }` envelope, or a bare
- * `{ success: false }` from a Power Platform connector. Normalizing them here means
- * surfaces branch on a category rather than sniffing message text, and raw backend
- * prose never reaches a user.
- */
+/** Normalize backend failures at the adapter boundary so UI surfaces use safe error categories. */
 
 export type ErrorCategory =
   | "init"

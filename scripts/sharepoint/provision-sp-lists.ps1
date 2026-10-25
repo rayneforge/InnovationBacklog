@@ -199,7 +199,7 @@ Ensure-TextField -ListTitle $list -Name "Relationship" -Type "Text" -DefaultValu
 Ensure-TextField -ListTitle $list -Name "AddedBy" -Type "Text"
 
 # Activity list
-$list = Ensure-List -Title "Activity" -Description "Activity stream for the Innovation Hub"
+$list = Ensure-List -Title "Activity" -Description "Activity stream for the Momentum"
 Ensure-TextField -ListTitle $list -Name "SubjectId" -Type "Text" -Required
 Ensure-ChoiceField -ListTitle $list -Name "SubjectType" -Choices @("Request", "Solution") -Required
 Ensure-TextField -ListTitle $list -Name "Action" -Type "Text"

@@ -30,7 +30,7 @@ export function Topbar({
     <header className={styles.topbar}>
       <button className={styles.brand} onClick={onHome}>
         <span className={styles.brandMark}>M</span>
-        <span>Innovation Hub</span>
+        <span>Momentum</span>
       </button>
       <span className={styles.spacer} />
       <div className={styles.actions}>

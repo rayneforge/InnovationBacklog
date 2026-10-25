@@ -3,7 +3,7 @@ namespace Momentum.Library.Domain.Tagging;
 /// <summary>
 /// Free-text labels on an idea or a solution. Tags are how people find work by
 /// technology, team, or theme, so they are normalized on the way in — otherwise
-/// "Power Automate", "power automate", and " Power Automate " become three tags
+/// "Quiet Hours", "quiet hours", and " Quiet Hours " become three tags
 /// that never match each other.
 /// </summary>
 public static class TagList

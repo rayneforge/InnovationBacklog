@@ -53,7 +53,7 @@ export interface VoterInsights {
    * the .NET side has no user list at all, so it says so rather than inventing one.
    */
   population: number | null;
-  /** Where `population` came from, e.g. "enabled Dataverse users". Null with it. */
+  /** Source of the eligible-user count; null when the host cannot measure it. */
   populationSource: string | null;
   /**
    * Share of all votes cast by the ten most active voters, 0..1. Null when nobody
@@ -82,13 +82,7 @@ export interface SolutionInsights {
   adopted: number;
 }
 
-/**
- * One person and what they have actually done.
- *
- * `name` is resolved by the adapter where the store keys on something that is not a
- * name — Dataverse actors are systemuser GUIDs, which render as "Someone". Hosts
- * whose key is already an identity omit it and the surface derives a name from the key.
- */
+/** Optional display name resolved by the host; otherwise callers use the stored identity key. */
 export interface ContributorInsight {
   id: string;
   name?: string | null;

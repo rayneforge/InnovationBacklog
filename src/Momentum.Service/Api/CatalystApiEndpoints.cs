@@ -689,19 +689,8 @@ public static class CatalystApiEndpoints
             return Results.Ok(summary);
         });
 
-        /*
-         * Programme-level numbers for the dashboard.
-         *
-         * Computed live from the repositories, for the same reason the engagement
-         * summaries above are: there is no rollup table, and a cache nobody
-         * invalidates is worse than no cache. Everything is visibility-filtered
-         * first, so two people can legitimately see different totals — a dashboard
-         * that leaked the count of items you cannot see would leak that they exist.
-         *
-         * The code app computes the same shape from Azure DevOps work items and
-         * Dataverse rows. Where the two hosts cannot measure a figure the same way
-         * they say so in `Source` rather than quietly differing.
-         */
+        // Compute live, visibility-filtered figures. Counts must never reveal
+        // inaccessible items; unavailable measurements retain their source/null state.
         api.MapGet("/insights", async (
             IIdentityProvider identity,
             IRequestRepository requests,

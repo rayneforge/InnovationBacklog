@@ -120,7 +120,7 @@ export function ActivitySplit({
             <ul className={styles.list}>
               {rows.map(({ record, item }, index) => {
                 const isUser = auditActorName(record.actorType) === "user";
-                const actor = isUser ? actorLabel(record) : "Innovation Hub";
+                const actor = isUser ? actorLabel(record) : "Momentum";
                 return (
                   <li key={record.id}>
                     <button

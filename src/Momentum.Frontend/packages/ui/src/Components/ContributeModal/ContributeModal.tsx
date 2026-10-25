@@ -7,7 +7,7 @@ import {
   SOLUTION_KINDS,
   solutionKindSpec,
   type SolutionKind,
-} from "@innovation-backlog/logic";
+} from "@momentum/logic";
 import { errorText } from "../../utils";
 
 /**
